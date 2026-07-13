@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>रक्तदाता Nepal — Blood Donor Registry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0d12;
+  --bg-alt:#0f131a;
+  --surface:#141922;
+  --surface-2:#1b212c;
+  --line:#252c38;
+  --text:#eef0f3;
+  --text-mute:#8993a4;
+  --text-faint:#5b6474;
+  --blood:#e0334f;
+  --blood-dim:#7a2635;
+  --blood-glow:rgba(224,51,79,.35);
+  --gold:#d3a24c;
+  --teal:#2c9d94;
+  --radius:14px;
+  --radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(224,51,79,.10), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 10%, rgba(211,162,76,.06), transparent 60%);
+  background-attachment:fixed;
+}
+h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:inherit;}
+::selection{background:var(--blood);color:#fff;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+/* ---------- layout shells ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+@media(max-width:640px){.wrap{padding:0 16px;}}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(10,13,18,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.05rem;}
+.brand-mark{
+  width:30px;height:30px;flex-shrink:0;
+  background:var(--blood);
+  clip-path:path('M15 2 C15 2 4 15 4 22 A11 11 0 0 0 26 22 C26 15 15 2 15 2 Z');
+  box-shadow:0 0 16px var(--blood-glow);
+}
+.brand small{display:block;color:var(--text-mute);font-weight:400;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;}
+.nav-links{display:flex;gap:28px;font-size:.88rem;color:var(--text-mute);}
+.nav-links a{transition:color .15s;padding:6px 0;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{
+  background:var(--blood);color:#fff;border:none;
+  padding:9px 18px;border-radius:999px;font-size:.85rem;font-weight:600;cursor:pointer;
+  transition:transform .15s, box-shadow .15s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px var(--blood-glow);}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);width:38px;height:38px;border-radius:8px;font-size:1.1rem;cursor:pointer;}
+@media(max-width:760px){.nav-links{display:none;}.menu-btn{display:block;}}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 40px;position:relative;overflow:hidden;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--gold);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace;margin-bottom:18px;
+}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);}
+.hero h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:700;max-width:760px;line-height:1.08;}
+.hero h1 em{font-style:normal;color:var(--blood);}
+.hero p.lede{color:var(--text-mute);font-size:1.05rem;max-width:560px;margin-top:18px;}
+.hero-np{color:var(--text-faint);font-size:.85rem;margin-top:6px;font-family:'JetBrains Mono',monospace;}
+.hero-actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+.btn{
+  padding:13px 24px;border-radius:999px;font-weight:600;font-size:.92rem;
+  border:1px solid transparent;cursor:pointer;transition:all .15s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary{background:var(--blood);color:#fff;}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px var(--blood-glow);}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--text);}
+.btn-ghost:hover{border-color:var(--text-faint);}
+
+/* ECG signature strip */
+.ecg-strip{margin-top:52px;position:relative;height:90px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--bg-alt);}
+.ecg-track{position:absolute;top:0;left:0;height:100%;width:200%;display:flex;animation:ecgScroll 9s linear infinite;}
+.ecg-track svg{height:100%;width:50%;flex-shrink:0;display:block;}
+@keyframes ecgScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ecg-labels{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;pointer-events:none;}
+.ecg-stat{font-family:'JetBrains Mono',monospace;}
+.ecg-stat .num{font-size:1.5rem;font-weight:600;color:var(--text);}
+.ecg-stat .lbl{font-size:.68rem;color:var(--text-mute);text-transform:uppercase;letter-spacing:.08em;}
+@media(max-width:640px){.ecg-labels{display:none;}}
+
+/* blood type distribution mini bars */
+.dist-row{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap;}
+.dist-chip{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  background:var(--surface);border:1px solid var(--line);border-radius:7px;
+  padding:5px 9px;color:var(--text-mute);display:flex;gap:6px;align-items:center;
+}
+.dist-chip b{color:var(--text);}
+
+/* ---------- section shared ---------- */
+section.panel{padding:52px 0;}
+.section-head{margin-bottom:28px;}
+.section-head .tag{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;}
+.section-head h2{font-size:1.7rem;margin-top:6px;}
+.section-head p{color:var(--text-mute);margin-top:6px;font-size:.94rem;max-width:520px;}
+
+/* ---------- grid: form + directory ---------- */
+.main-grid{display:grid;grid-template-columns:400px 1fr;gap:24px;align-items:start;}
+@media(max-width:920px){.main-grid{grid-template-columns:1fr;}}
+
+.card{
+  background:linear-gradient(180deg,var(--surface),var(--bg-alt));
+  border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+}
+.card h3{font-size:1.15rem;margin-bottom:4px;}
+.card .sub{color:var(--text-mute);font-size:.85rem;margin-bottom:20px;}
+
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:.78rem;color:var(--text-mute);margin-bottom:7px;font-weight:500;}
+.field input[type=text],.field input[type=tel],.field input[type=number],.field select{
+  width:100%;background:var(--surface-2);border:1px solid var(--line);color:var(--text);
+  padding:11px 13px;border-radius:var(--radius-sm);font-size:.92rem;font-family:'Inter',sans-serif;
+  transition:border-color .15s, background .15s;
+}
+.field input::placeholder{color:var(--text-faint);}
+.field input:focus,.field select:focus{border-color:var(--blood);background:var(--surface);}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%238993a4'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
+.field select:disabled{opacity:.45;cursor:not-allowed;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.hint{font-size:.72rem;color:var(--text-faint);margin-top:5px;}
+.err{font-size:.72rem;color:var(--blood);margin-top:5px;display:none;}
+.field.invalid input,.field.invalid select{border-color:var(--blood);}
+.field.invalid .err{display:block;}
+
+.bg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.bg-chip{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:10px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:600;
+  font-size:.88rem;cursor:pointer;transition:all .15s;color:var(--text-mute);
+}
+.bg-chip:hover{border-color:var(--text-faint);color:var(--text);}
+.bg-chip.active{background:var(--blood);border-color:var(--blood);color:#fff;box-shadow:0 4px 14px var(--blood-glow);}
+
+.submit-btn{
+  width:100%;background:var(--blood);color:#fff;border:none;padding:14px;
+  border-radius:var(--radius-sm);font-weight:600;font-size:.95rem;cursor:pointer;
+  margin-top:6px;transition:transform .15s, box-shadow .15s;
+}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px var(--blood-glow);}
+.form-msg{margin-top:12px;font-size:.82rem;padding:10px 12px;border-radius:8px;display:none;}
+.form-msg.show{display:block;}
+.form-msg.ok{background:rgba(44,157,148,.12);color:var(--teal);border:1px solid rgba(44,157,148,.3);}
+
+/* ---------- directory ---------- */
+.dir-toolbar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.dir-toolbar input,.dir-toolbar select{
+  background:var(--surface);border:1px solid var(--line);color:var(--text);
+  padding:10px 13px;border-radius:var(--radius-sm);font-size:.86rem;
+}
+.dir-toolbar input{flex:1;min-width:160px;}
+.dir-toolbar select{min-width:130px;}
+.dir-count{color:var(--text-mute);font-size:.82rem;margin-bottom:14px;}
+.donor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.donor-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px;position:relative;transition:border-color .15s, transform .15s;
+}
+.donor-card:hover{border-color:var(--text-faint);transform:translateY(-2px);}
+.donor-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.donor-name{font-weight:600;font-size:1rem;}
+.bg-badge{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.78rem;
+  background:var(--blood-dim);color:#ffb3c0;border-radius:7px;padding:4px 9px;flex-shrink:0;
+}
+.donor-meta{margin-top:10px;font-size:.82rem;color:var(--text-mute);display:flex;flex-direction:column;gap:5px;}
+.donor-meta span{display:flex;gap:7px;align-items:flex-start;}
+.donor-meta .ic{color:var(--text-faint);width:14px;flex-shrink:0;}
+.donor-actions{display:flex;gap:8px;margin-top:14px;}
+.donor-actions a,.donor-actions button{
+  flex:1;text-align:center;font-size:.78rem;padding:8px 0;border-radius:7px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--text-mute);
+  cursor:pointer;text-decoration:none;transition:all .15s;
+}
+.donor-actions a:hover{border-color:var(--teal);color:var(--teal);}
+.donor-actions button:hover{border-color:var(--blood);color:var(--blood);}
+
+.empty-state{
+  border:1px dashed var(--line);border-radius:var(--radius);padding:48px 24px;text-align:center;color:var(--text-mute);
+}
+.empty-state .drop{width:36px;height:36px;margin:0 auto 14px;background:var(--blood-dim);clip-path:path('M18 2 C18 2 5 18 5 27 A13 13 0 0 0 31 27 C31 18 18 2 18 2 Z');opacity:.7;}
+.empty-state strong{color:var(--text);display:block;margin-bottom:6px;font-family:'Space Grotesk',sans-serif;}
+
+/* ---------- eligibility strip ---------- */
+.elig-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+.elig-item{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;}
+.elig-item .n{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:.78rem;margin-bottom:8px;}
+.elig-item h4{font-size:.98rem;margin-bottom:6px;}
+.elig-item p{font-size:.83rem;color:var(--text-mute);}
+
+footer{border-top:1px solid var(--line);padding:32px 0;margin-top:40px;}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:var(--text-faint);font-size:.8rem;}
+.foot-row .brand small{margin-top:2px;}
+
+@media(max-width:480px){
+  .bg-grid{grid-template-columns:repeat(4,1fr);}
+  .field-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="brand-mark"></span>
+      <div>
+        रक्तSewa Nepal
+        <small>Blood Donor Registry</small>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#register">Register</a>
+      <a href="#directory">Directory</a>
+      <a href="#eligibility">Eligibility</a>
+    </nav>
+    <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Donor</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Nepal · 7 Province Coverage</div>
+    <h1>One pint of blood<br><em>saves up to three lives.</em></h1>
+    <p class="lede">A simple, local registry to connect voluntary blood donors across Nepal — from Koshi to Sudurpashchim. Register once, get found when it matters.</p>
+    <p class="hero-np">रगत दान जीवन दान — Blood donation is life donation.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register as Donor</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('directory').scrollIntoView({behavior:'smooth'})">Browse Directory</button>
+    </div>
+
+    <div class="dist-row" id="distRow"></div>
+  </div>
+
+  <div class="ecg-strip">
+    <div class="ecg-track" id="ecgTrack">
+      <svg viewBox="0 0 400 90" preserveAspectRatio="none"><polyline points="0,45 60,45 82,45 95,10 108,80 120,45 145,45 400,45" fill="none" stroke="#e0334f" stroke-width="2.5"/></svg>
+      <svg viewBox="0 0 400 90" preserveAspectRatio="none"><polyline points="0,45 60,45 82,45 95,10 108,80 120,45 145,45 400,45" fill="none" stroke="#e0334f" stroke-width="2.5"/></svg>
+    </div>
+    <div class="ecg-labels">
+      <div class="ecg-stat"><div class="num mono" id="statTotal">0</div><div class="lbl">Registered Donors</div></div>
+      <div class="ecg-stat"><div class="num mono" id="statLives">0</div><div class="lbl">Potential Lives Impacted</div></div>
+      <div class="ecg-stat"><div class="num mono" id="statProvinces">0</div><div class="lbl">Provinces Represented</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="register">
+  <div class="wrap main-grid">
+
+    <div class="card">
+      <h3>Register as a donor</h3>
+      <p class="sub">Your details are saved locally in this browser so you can add multiple donors from this device.</p>
+
+      <form id="donorForm" novalidate>
+        <div class="field" id="f-name">
+          <label for="name">Full name</label>
+          <input type="text" id="name" placeholder="e.g. Sudeep Pandit" autocomplete="off">
+          <div class="err">Please enter a name.</div>
+        </div>
+
+        <div class="field" id="f-phone">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" placeholder="98XXXXXXXX" maxlength="10" autocomplete="off">
+          <div class="hint">10-digit mobile number, starts with 9</div>
+          <div class="err">Enter a valid 10-digit Nepali mobile number.</div>
+        </div>
+
+        <div class="field" id="f-bg">
+          <label>Blood group</label>
+          <div class="bg-grid" id="bgGrid"></div>
+          <div class="err">Please select a blood group.</div>
+        </div>
+
+        <div class="field" id="f-province">
+          <label for="province">Province</label>
+          <select id="province"><option value="">Select province</option></select>
+          <div class="err">Please select a province.</div>
+        </div>
+
+        <div class="field" id="f-district">
+          <label for="district">District</label>
+          <select id="district" disabled><option value="">Select province first</option></select>
+          <div class="err">Please select a district.</div>
+        </div>
+
+        <div class="field" id="f-muni">
+          <label for="muni">Municipality / Rural Municipality</label>
+          <input type="text" id="muni" placeholder="e.g. Kathmandu Metropolitan City" autocomplete="off">
+          <div class="err">Please enter the municipality or rural municipality.</div>
+        </div>
+
+        <div class="field-row">
+          <div class="field" id="f-ward">
+            <label for="ward">Ward no. <span style="color:var(--text-faint)">(optional)</span></label>
+            <input type="number" id="ward" placeholder="e.g. 5" min="1" max="35">
+          </div>
+          <div class="field">
+            <label for="lastdonation">Last donation <span style="color:var(--text-faint)">(optional)</span></label>
+            <input type="text" id="lastdonation" placeholder="e.g. Jan 2026">
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Save donor</button>
+        <div class="form-msg ok" id="formMsg">✓ Donor saved to this device.</div>
+      </form>
+    </div>
+
+    <div id="directory">
+      <div class="section-head">
+        <div class="tag">Directory</div>
+        <h2>Registered donors</h2>
+        <p>Search by name or phone, or filter by blood group and province. Data lives only in this browser's local storage.</p>
+      </div>
+
+      <div class="dir-toolbar">
+        <input type="text" id="searchBox" placeholder="Search by name or phone…">
+        <select id="filterBg"><option value="">All blood groups</option></select>
+        <select id="filterProvince"><option value="">All provinces</option></select>
+      </div>
+      <div class="dir-count" id="dirCount"></div>
+      <div id="donorList"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="panel" id="eligibility">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Before you donate</div>
+      <h2>General eligibility guidelines</h2>
+      <p>Standard baseline criteria used broadly across blood donation programs. Always confirm with the collecting hospital or blood bank on the day.</p>
+    </div>
+    <div class="elig-grid">
+      <div class="elig-item"><div class="n">01</div><h4>Age & weight</h4><p>Generally 18–65 years old and at least 50 kg body weight.</p></div>
+      <div class="elig-item"><div class="n">02</div><h4>Gap between donations</h4><p>At least 3–4 months since your last whole blood donation.</p></div>
+      <div class="elig-item"><div class="n">03</div><h4>General health</h4><p>Feeling well on the day, no fever, and adequate sleep the night before.</p></div>
+      <div class="elig-item"><div class="n">04</div><h4>Eat & hydrate</h4><p>Have a meal and drink water before donating — avoid donating on an empty stomach.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="brand">
+      <span class="brand-mark" style="width:20px;height:20px;"></span>
+      <div>रक्तSewa Nepal <small>Built for local, community-run donor coordination</small></div>
+    </div>
+    <div>All donor data is stored only in this browser (localStorage) — nothing is sent to a server.</div>
+  </div>
+</footer>
+
+<script>
+/* ---------------- Nepal province → district data ---------------- */
+const provinceData = {
+  "Koshi": ["Bhojpur","Dhankuta","Ilam","Jhapa","Khotang","Morang","Okhaldhunga","Panchthar","Sankhuwasabha","Solukhumbu","Sunsari","Taplejung","Terhathum","Udayapur"],
+  "Madhesh": ["Bara","Dhanusha","Mahottari","Parsa","Rautahat","Saptari","Sarlahi","Siraha"],
+  "Bagmati": ["Bhaktapur","Chitwan","Dhading","Dolakha","Kathmandu","Kavrepalanchok","Lalitpur","Makwanpur","Nuwakot","Ramechhap","Rasuwa","Sindhuli","Sindhupalchok"],
+  "Gandaki": ["Baglung","Gorkha","Kaski","Lamjung","Manang","Mustang","Myagdi","Nawalpur","Parbat","Syangja","Tanahun"],
+  "Lumbini": ["Arghakhanchi","Banke","Bardiya","Dang","Eastern Nawalparasi","Gulmi","Kapilvastu","Palpa","Pyuthan","Rolpa","Rukum East","Rupandehi"],
+  "Karnali": ["Dailekh","Dolpa","Humla","Jajarkot","Jumla","Kalikot","Mugu","Rukum West","Salyan","Surkhet"],
+  "Sudurpashchim": ["Achham","Baitadi","Bajhang","Bajura","Dadeldhura","Darchula","Doti","Kailali","Kanchanpur"]
+};
+const bloodGroups = ["A+","A-","B+","B-","AB+","AB-","O+","O-"];
+const STORAGE_KEY = "np_blood_donors_v1";
+
+/* ---------------- state ---------------- */
+let donors = [];
+let selectedBg = "";
+
+/* ---------------- init selects ---------------- */
+function populateProvinceSelects(){
+  const provinceSel = document.getElementById('province');
+  const filterProvince = document.getElementById('filterProvince');
+  Object.keys(provinceData).forEach(p=>{
+    const o1=document.createElement('option'); o1.value=p; o1.textContent=p+" Province"; provinceSel.appendChild(o1);
+    const o2=document.createElement('option'); o2.value=p; o2.textContent=p; filterProvince.appendChild(o2);
+  });
+}
+function populateBgFilter(){
+  const filterBg = document.getElementById('filterBg');
+  bloodGroups.forEach(bg=>{
+    const o=document.createElement('option'); o.value=bg; o.textContent=bg; filterBg.appendChild(o);
+  });
+}
+function buildBgGrid(){
+  const grid = document.getElementById('bgGrid');
+  bloodGroups.forEach(bg=>{
+    const chip=document.createElement('div');
+    chip.className='bg-chip'; chip.textContent=bg; chip.dataset.bg=bg;
+    chip.addEventListener('click',()=>{
+      document.querySelectorAll('.bg-chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active'); selectedBg=bg;
+      document.getElementById('f-bg').classList.remove('invalid');
+    });
+    grid.appendChild(chip);
+  });
+}
+document.getElementById('province').addEventListener('change', function(){
+  const districtSel = document.getElementById('district');
+  districtSel.innerHTML='';
+  const val=this.value;
+  if(!val){
+    districtSel.disabled=true;
+    districtSel.innerHTML='<option value="">Select province first</option>';
+    return;
+  }
+  districtSel.disabled=false;
+  const defaultOpt=document.createElement('option'); defaultOpt.value=''; defaultOpt.textContent='Select district';
+  districtSel.appendChild(defaultOpt);
+  provinceData[val].forEach(d=>{
+    const o=document.createElement('option'); o.value=d; o.textContent=d; districtSel.appendChild(o);
+  });
+});
+
+/* ---------------- storage ---------------- */
+function loadDonors(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    donors = raw ? JSON.parse(raw) : [];
+  }catch(e){ donors = []; }
+}
+function saveDonors(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(donors));
+}
+
+/* ---------------- validation helpers ---------------- */
+function setInvalid(id, invalid){
+  const el = document.getElementById(id);
+  el.classList.toggle('invalid', invalid);
+}
+
+/* ---------------- form submit ---------------- */
+document.getElementById('donorForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const province = document.getElementById('province').value;
+  const district = document.getElementById('district').value;
+  const muni = document.getElementById('muni').value.trim();
+  const ward = document.getElementById('ward').value.trim();
+  const lastdonation = document.getElementById('lastdonation').value.trim();
+
+  let valid = true;
+  const phoneOk = /^9\d{9}$/.test(phone);
+
+  setInvalid('f-name', !name); if(!name) valid=false;
+  setInvalid('f-phone', !phoneOk); if(!phoneOk) valid=false;
+  setInvalid('f-bg', !selectedBg); if(!selectedBg) valid=false;
+  setInvalid('f-province', !province); if(!province) valid=false;
+  setInvalid('f-district', !district); if(!district) valid=false;
+  setInvalid('f-muni', !muni); if(!muni) valid=false;
+
+  if(!valid) return;
+
+  const donor = {
+    id: Date.now().toString(36)+Math.random().toString(36).slice(2,7),
+    name, phone, bg: selectedBg, province, district, muni,
+    ward: ward || "", lastdonation: lastdonation || "",
+    createdAt: new Date().toISOString()
+  };
+  donors.unshift(donor);
+  saveDonors();
+  renderAll();
+
+  this.reset();
+  selectedBg="";
+  document.querySelectorAll('.bg-chip').forEach(c=>c.classList.remove('active'));
+  document.getElementById('district').innerHTML='<option value="">Select province first</option>';
+  document.getElementById('district').disabled=true;
+  ['f-name','f-phone','f-bg','f-province','f-district','f-muni'].forEach(id=>setInvalid(id,false));
+
+  const msg = document.getElementById('formMsg');
+  msg.classList.add('show');
+  setTimeout(()=>msg.classList.remove('show'), 3200);
+});
+
+/* ---------------- delete ---------------- */
+function deleteDonor(id){
+  donors = donors.filter(d=>d.id!==id);
+  saveDonors();
+  renderAll();
+}
+
+/* ---------------- render directory ---------------- */
+function renderDirectory(){
+  const list = document.getElementById('donorList');
+  const search = document.getElementById('searchBox').value.trim().toLowerCase();
+  const fBg = document.getElementById('filterBg').value;
+  const fProvince = document.getElementById('filterProvince').value;
+
+  let filtered = donors.filter(d=>{
+    const matchesSearch = !search || d.name.toLowerCase().includes(search) || d.phone.includes(search);
+    const matchesBg = !fBg || d.bg===fBg;
+    const matchesProvince = !fProvince || d.province===fProvince;
+    return matchesSearch && matchesBg && matchesProvince;
+  });
+
+  document.getElementById('dirCount').textContent = `${filtered.length} of ${donors.length} donor${donors.length!==1?'s':''} shown`;
+
+  if(filtered.length===0){
+    list.innerHTML = `
+      <div class="empty-state">
+        <div class="drop"></div>
+        <strong>${donors.length===0 ? 'No donors yet' : 'No matches found'}</strong>
+        ${donors.length===0 ? 'Be the first to register above and help someone in need.' : 'Try clearing your search or filters.'}
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = `<div class="donor-grid">${filtered.map(d=>`
+    <div class="donor-card">
+      <div class="donor-top">
+        <div class="donor-name">${escapeHtml(d.name)}</div>
+        <div class="bg-badge">${d.bg}</div>
+      </div>
+      <div class="donor-meta">
+        <span><span class="ic">📍</span>${escapeHtml(d.muni)}${d.ward ? ', Ward '+escapeHtml(d.ward):''}</span>
+        <span><span class="ic">🗺</span>${escapeHtml(d.district)}, ${escapeHtml(d.province)}</span>
+        <span><span class="ic">📞</span>${escapeHtml(d.phone)}</span>
+        ${d.lastdonation ? `<span><span class="ic">🩸</span>Last donated: ${escapeHtml(d.lastdonation)}</span>` : ''}
+      </div>
+      <div class="donor-actions">
+        <a href="tel:${d.phone}">Call</a>
+        <button onclick="deleteDonor('${d.id}')">Remove</button>
+      </div>
+    </div>
+  `).join('')}</div>`;
+}
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+/* ---------------- stats + distribution ---------------- */
+function renderStats(){
+  document.getElementById('statTotal').textContent = donors.length;
+  document.getElementById('statLives').textContent = donors.length*3;
+  const provincesUsed = new Set(donors.map(d=>d.province));
+  document.getElementById('statProvinces').textContent = provincesUsed.size;
+
+  const distRow = document.getElementById('distRow');
+  distRow.innerHTML = bloodGroups.map(bg=>{
+    const count = donors.filter(d=>d.bg===bg).length;
+    return `<div class="dist-chip">${bg} <b>${count}</b></div>`;
+  }).join('');
+}
+
+function renderAll(){
+  renderDirectory();
+  renderStats();
+}
+
+/* ---------------- events ---------------- */
+document.getElementById('searchBox').addEventListener('input', renderDirectory);
+document.getElementById('filterBg').addEventListener('change', renderDirectory);
+document.getElementById('filterProvince').addEventListener('change', renderDirectory);
+document.getElementById('phone').addEventListener('input', function(){
+  this.value = this.value.replace(/\D/g,'').slice(0,10);
+});
+
+/* ---------------- boot ---------------- */
+populateProvinceSelects();
+populateBgFilter();
+buildBgGrid();
+loadDonors();
+renderAll();
+</script>
+</body>
+</html>
