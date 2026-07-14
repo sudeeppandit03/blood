@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<h>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Donation Network — Project Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+<header class="top">
+  <span>Blood Donation Network <span class="dot">/</span> Project</span>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" type="button">
+    <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="12" cy="12" r="4.2"/>
+      <line x1="12" y1="1.5" x2="12" y2="4.2"/>
+      <line x1="12" y1="19.8" x2="12" y2="22.5"/>
+      <line x1="4.2" y1="4.2" x2="6.1" y2="6.1"/>
+      <line x1="17.9" y1="17.9" x2="19.8" y2="19.8"/>
+      <line x1="1.5" y1="12" x2="4.2" y2="12"/>
+      <line x1="19.8" y1="12" x2="22.5" y2="12"/>
+      <line x1="4.2" y1="19.8" x2="6.1" y2="17.9"/>
+      <line x1="17.9" y1="6.1" x2="19.8" y2="4.2"/>
+    </svg>
+    <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>
+    </svg>
+  </button>
+</header>
+
+<nav class="rail" id="rail"></nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="s-hero">
+  <div class="abstract-layer" aria-hidden="true">
+    <span class="ring slow-spin" style="width:420px;height:420px; right:-140px; top:-120px; border-color:var(--rose-light);"></span>
+    <span class="ring slow-spin-rev" style="width:260px;height:260px; right:-40px; top:60px;"></span>
+    <span class="dot-arc drift" style="width:180px;height:180px; left:-60px; bottom:40px; border-color:var(--gold);"></span>
+  </div>
+  <div class="wrap">
+    <div class="hero-top">
+      <div>
+        <div class="eyebrow">Project — July 15, 2026</div>
+        <h1>Blood Donation<br><span class="accent">Network.</span></h1>
+        <p class="hero-sub">A web platform that connects willing blood donors with people who need them — organised across Nepal's provinces, districts, and local levels, right down to the ward.</p>
+      </div>
+      <div class="hero-meta">
+        Softwarica College<br>
+        of IT &amp; E-Commerce<br>
+        Kathmandu, Nepal
+      </div>
+    </div>
+
+    <div class="pulse-block">
+      <div class="particle-field" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <svg id="heroPulse" viewBox="0 0 460 140" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 70 L120 70 L145 30 L170 110 L195 50 L215 70 L450 70" fill="none" stroke="var(--line)" stroke-width="2"/>
+        <path id="pulseLine" d="M10 70 L120 70 L145 30 L170 110 L195 50 L215 70 L450 70" fill="none" stroke="var(--rose)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g class="drop-icon" transform="translate(215,70)">
+          <path d="M0 -16 C 9 -3, 12 6, 0 16 C -12 6, -9 -3, 0 -16 Z" fill="var(--rose)"/>
+        </g>
+      </svg>
+      <div class="pulse-caption">One donation can save up to <strong>three lives</strong></div>
+    </div>
+
+    <div class="scroll-cue"><span class="line"></span> Scroll to begin</div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="s-about">
+  <div class="abstract-layer" aria-hidden="true">
+    <span class="ring slow-spin-rev" style="width:320px;height:320px; left:-160px; bottom:-160px; border-color:var(--rose-light);"></span>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow reveal">What Is It</div>
+    <h2 class="reveal">Turning willingness into a searchable network.</h2>
+    <p class="lede reveal">Blood cannot be manufactured — it can only come from another person. Yet most willing donors and the people who need them never find each other in time. This platform closes that gap: a place to register as a donor and to search for one, organised by exactly where in Nepal you are.</p>
+
+    <div class="about-grid" style="margin-top:56px;">
+      <div class="formula-card reveal">
+        <h3>Who can donate</h3>
+        <p>General eligibility guidelines followed by most blood banks in Nepal.</p>
+        <div class="criteria-list">
+          <div class="criteria-row"><span><strong>Age 18–65</strong> years old</span></div>
+          <div class="criteria-row"><span><strong>Weight 50 kg</strong> or more</span></div>
+          <div class="criteria-row"><span><strong>Haemoglobin 12.5 g/dL</strong> or higher</span></div>
+          <div class="criteria-row"><span>At least <strong>90 days</strong> since the last donation</span></div>
+          <div class="criteria-row"><span>Generally in <strong>good health</strong>, free from infection</span></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 style="margin-bottom:14px;">Blood type compatibility</h3>
+        <div class="category-list">
+          <div class="category-row"><span class="name"><span class="swatch" style="background:var(--slate)"></span>O−</span><span class="range">Donates to all types</span></div>
+          <div class="category-row"><span class="name"><span class="swatch" style="background:var(--slate)"></span>O+</span><span class="range">O+, A+, B+, AB+</span></div>
+          <div class="category-row"><span class="name"><span class="swatch" style="background:var(--rose)"></span>A−</span><span class="range">A−, A+, AB−, AB+</span></div>
+          <div class="category-row"><span class="name"><span class="swatch" style="background:var(--rose)"></span>A+</span><span class="range">A+, AB+</span></div>
+          <div class="category-row"><span class="name"><span class="swatch" style="background:var(--gold)"></span>B−</span><span class="range">B−, B+, AB−, AB+</span></div>
+          <div class="category-row"><span class="name"><span class="swatch" style="background:var(--gold)"></span>B+</span><span class="range">B+, AB+</span></div>
+          <div class="category-row"><span class="name"><span class="swatch" style="background:var(--maroon)"></span>AB−</span><span class="range">AB−, AB+</span></div>
+          <div class="category-row"><span class="name"><span class="swatch" style="background:var(--maroon)"></span>AB+</span><span class="range">Receives from all types</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORKFLOW ================= -->
+<section id="s-workflow">
+  <div class="abstract-layer" aria-hidden="true">
+    <span class="dot-arc drift" style="width:220px;height:220px; right:-80px; top:20%; border-color:var(--maroon);"></span>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow reveal">How It Works</div>
+    <h2 class="reveal">Five steps, register to reach.</h2>
+    <p class="lede reveal">Every donor and every search on this platform passes through the same short pipeline.</p>
+
+    <div class="flow reveal-stagger" style="margin-top:48px;">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-body">
+          <h3>Register</h3>
+          <p>A donor fills in their name, phone number, blood group, and exact location — province, district, and local level, down to the ward.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <div class="flow-body">
+          <h3>Validate</h3>
+          <p>The form checks the phone number and blood group before anything is saved, so records stay clean and contactable.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-body">
+          <h3>Store locally</h3>
+          <p>Details are saved in the browser's own storage using the Web Storage API — no server, no account, no external database.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04</div>
+        <div class="flow-body">
+          <h3>Filter and match</h3>
+          <p>Anyone in need searches the same list by province and blood type, and sees only donors who actually match.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05</div>
+        <div class="flow-body">
+          <h3>Connect</h3>
+          <p>A tap on a donor's number opens the phone dialer directly — the platform's job ends the moment two people can talk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIVE DEMO ================= -->
+<section id="s-demo">
+  <div class="wrap">
+    <div class="eyebrow reveal">Live Demonstration</div>
+    <h2 class="reveal">Register a donor, or find one.</h2>
+    <p class="lede reveal">This is the actual tool. Add yourself as a donor, or switch to search and filter the list by province and blood type — everything runs and saves right here in your browser.</p>
+
+    <div class="demo-tabs reveal" id="demoTabs" style="margin-top:40px;">
+      <span class="thumb"></span>
+      <button type="button" class="active" data-view="register">Register</button>
+      <button type="button" data-view="browse">Find Donors</button>
+    </div>
+
+    <div class="demo-panel reveal">
+
+      <!-- REGISTER VIEW -->
+      <div class="demo-view active" id="viewRegister">
+        <div class="form-grid">
+          <div class="field">
+            <label for="donorName">Full name</label>
+            <input type="text" id="donorName" placeholder="e.g. Sudeep Pandit">
+          </div>
+          <div class="field">
+            <label for="donorPhone">Phone number</label>
+            <input type="tel" id="donorPhone" placeholder="9XXXXXXXXX">
+          </div>
+          <div class="field">
+            <label for="donorBlood">Blood group</label>
+            <select id="donorBlood">
+              <option value="">Select blood group</option>
+              <option>A+</option><option>A−</option>
+              <option>B+</option><option>B−</option>
+              <option>AB+</option><option>AB−</option>
+              <option>O+</option><option>O−</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="donorProvince">Province</label>
+            <select id="donorProvince"><option value="">Select province</option></select>
+          </div>
+          <div class="field">
+            <label for="donorDistrict">District</label>
+            <select id="donorDistrict" disabled><option value="">Select province first</option></select>
+          </div>
+          <div class="field">
+            <label for="donorLocalName">Municipality / Rural municipality name</label>
+            <input type="text" id="donorLocalName" placeholder="e.g. Kathmandu Metropolitan City">
+          </div>
+          <div class="field">
+            <label for="donorWard">Ward number <span style="opacity:.6;">(optional)</span></label>
+            <input type="number" id="donorWard" min="1" max="33" placeholder="e.g. 4">
+          </div>
+        </div>
+
+        <button class="calc-btn" id="registerBtn">Register as donor</button>
+        <div class="form-msg" id="registerMsg"></div>
+      </div>
+
+      <!-- BROWSE VIEW -->
+      <div class="demo-view" id="viewBrowse">
+        <div class="browse-controls">
+          <div class="field">
+            <label for="filterProvince">Province</label>
+            <select id="filterProvince"><option value="">All provinces</option></select>
+          </div>
+          <div class="field">
+            <label for="filterBlood">Blood group</label>
+            <select id="filterBlood">
+              <option value="">All blood groups</option>
+              <option>A+</option><option>A−</option>
+              <option>B+</option><option>B−</option>
+              <option>AB+</option><option>AB−</option>
+              <option>O+</option><option>O−</option>
+            </select>
+          </div>
+          <button class="calc-btn ghost" id="resetFilters" style="margin-top:0;">Reset</button>
+        </div>
+
+        <div class="results-meta">
+          <span id="resultsCount">Showing donors</span>
+          <button class="clear-link" id="clearMyData">Clear my registered data</button>
+        </div>
+
+        <div class="donor-list" id="donorList"></div>
+        <div class="empty-state" id="emptyState" style="display:none;">No donors match these filters yet — be the first to register from this area.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section id="s-features">
+  <div class="wrap">
+    <div class="eyebrow reveal">Key Highlights</div>
+    <h2 class="reveal">Built to be simple, local, and fast.</h2>
+
+    <div class="feature-grid reveal-stagger" style="margin-top:48px;">
+      <div class="feature-cell">
+        <span class="mark">Instant</span>
+        <h3>Real-time registration</h3>
+        <p>A donor is added to the list the moment the form is submitted — no waiting, no approval queue.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Nationwide</span>
+        <h3>Full administrative hierarchy</h3>
+        <p>Every donor is placed accurately by Nepal's 7 provinces, 77 districts, and local level type.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Targeted</span>
+        <h3>Province and blood-type search</h3>
+        <p>Filter the entire donor list down to exactly who's needed, in exactly the right area.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Private</span>
+        <h3>Nothing leaves the browser</h3>
+        <p>No account, no server, no third party — donor details stay stored locally on the device that entered them.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Direct</span>
+        <h3>One-tap calling</h3>
+        <p>Every donor's number is a live link that opens the phone dialer immediately.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Responsive</span>
+        <h3>Works on any screen</h3>
+        <p>From a classroom projector to a phone in someone's hand during an emergency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TECHNOLOGIES ================= -->
+<section id="s-tech">
+  <div class="abstract-layer" aria-hidden="true">
+    <span class="dot-arc drift" style="width:200px;height:200px; left:-70px; top:15%; border-color:var(--rose-light);"></span>
+  </div>
+  <div class="wrap">
+    <div class="eyebrow reveal">Under The Hood</div>
+    <h2 class="reveal">Technologies used.</h2>
+    <p class="lede reveal">No frameworks, no build step, no dependencies to install — just the core web platform, used deliberately.</p>
+
+    <div class="feature-grid reveal-stagger" style="margin-top:48px;">
+      <div class="feature-cell">
+        <span class="mark">Markup</span>
+        <h3>HTML5</h3>
+        <p>Semantic, single-file structure that holds every section of this presentation and the donor tool itself.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Styling</span>
+        <h3>CSS3</h3>
+        <p>Custom properties, Grid and Flexbox, and keyframe animation drive the layout, the theme system, and the pulse-line motion.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Logic</span>
+        <h3>JavaScript (ES6)</h3>
+        <p>Vanilla JavaScript handles form validation, cascading province-district selects, filtering, and rendering — no library required.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Storage</span>
+        <h3>Web Storage API</h3>
+        <p>Donor records persist between visits using <span style="font-family:var(--font-mono);">localStorage</span>, entirely on the user's own device.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Typography</span>
+        <h3>Google Fonts</h3>
+        <p>Space Grotesk, Inter, and JetBrains Mono are loaded from the Google Fonts CDN for display, body, and data text.</p>
+      </div>
+      <div class="feature-cell">
+        <span class="mark">Layout</span>
+        <h3>Responsive Design</h3>
+        <p>Fluid grids, clamp-based type, and three breakpoints keep the experience solid from a phone to a classroom projector.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FUTURE IMPROVEMENTS ================= -->
+<section id="s-future">
+  <div class="wrap">
+    <div class="eyebrow reveal">What's Next</div>
+    <h2 class="reveal">Where this project can grow.</h2>
+    <p class="lede reveal">A first version is deliberately small. These are the directions planned for future iterations.</p>
+
+    <div class="future-list reveal-stagger" style="margin-top:44px;">
+      <div class="future-row">
+        <div class="tag">Sync</div>
+        <div><h3>Cloud backend</h3><p>Move storage from the browser to a shared server so donor records aren't limited to one device.</p></div>
+      </div>
+      <div class="future-row">
+        <div class="tag">Trust</div>
+        <div><h3>Phone verification</h3><p>An SMS OTP step when registering, to confirm numbers are real and reduce false entries.</p></div>
+      </div>
+      <div class="future-row">
+        <div class="tag">Urgency</div>
+        <div><h3>Emergency broadcast</h3><p>Push an urgent request straight to matching donors nearby instead of waiting for someone to search.</p></div>
+      </div>
+      <div class="future-row">
+        <div class="tag">Integration</div>
+        <div><h3>Blood bank inventory</h3><p>Connect with local blood banks and hospitals to show live stock levels alongside individual donors.</p></div>
+      </div>
+      <div class="future-row">
+        <div class="tag">Reach</div>
+        <div><h3>Nepali language support</h3><p>A full Nepali-language interface so the platform is usable by a much wider audience.</p></div>
+      </div>
+      <div class="future-row">
+        <div class="tag">Care</div>
+        <div><h3>Donation history</h3><p>Track each donor's last donation date and gently remind them once they're eligible again.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOSING ================= -->
+<section id="s-closing">
+  <div class="abstract-layer" aria-hidden="true">
+    <span class="ring slow-spin" style="width:380px;height:380px; left:50%; top:50%; margin-left:-190px; margin-top:-190px; border-color:var(--rose-light);"></span>
+    <span class="ring slow-spin-rev" style="width:520px;height:520px; left:50%; top:50%; margin-left:-260px; margin-top:-260px;"></span>
+  </div>
+  <div class="wrap closing">
+    <div class="eyebrow reveal" style="justify-content:center;">Thank You</div>
+    <h2 class="reveal">Questions are welcome.</h2>
+    <p class="reveal" style="margin-left:auto;margin-right:auto;">Blood Donation Network was built to show that a genuinely useful public tool doesn't need a hospital's budget — just an accurate map of where people are, a clear form, and respect for how urgent this can be for someone.</p>
+    <div class="credit reveal">Presented by <strong>Tech Sense Students </strong> · Softwarica College of IT &amp; E-Commerce</div>
+  </div>
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
